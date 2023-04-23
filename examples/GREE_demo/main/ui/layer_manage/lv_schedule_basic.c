@@ -56,25 +56,25 @@ void lv_func_create_layer(lv_layer_t *create_layer)
     bool result = false;
     result = create_layer->enter_cb(create_layer);
     if (true == result) {
-        LV_LOG_USER("[+] Create lv_layer:%s", create_layer->lv_obj_name);
+        // LV_LOG_USER("[+] Create lv_layer:%s", create_layer->lv_obj_name);
     }
 
     if ((true == result) && (NULL == create_layer->timer_handle)) {
         create_layer->timer_handle = lv_timer_create(create_layer->timer_cb, TIME_ON_TRIGGER, NULL);
         //lv_timer_set_repeat_count(create_layer->timer_handle, 10);
-        LV_LOG_USER("[+] Create lv_timer:%s", create_layer->lv_obj_name);
+        // LV_LOG_USER("[+] Create lv_timer:%s", create_layer->lv_obj_name);
     }
 
     if (create_layer->lv_show_layer) {
         create_layer->lv_show_layer->lv_obj_parent = create_layer->lv_obj_layer;
         result = create_layer->lv_show_layer->enter_cb(create_layer->lv_show_layer);
         if (true == result) {
-            LV_LOG_USER("[+] Create show lv_layer:%s", create_layer->lv_show_layer->lv_obj_name);
+            // LV_LOG_USER("[+] Create show lv_layer:%s", create_layer->lv_show_layer->lv_obj_name);
         }
 
         if ((true == result) && (NULL == create_layer->lv_show_layer->timer_handle)) {
             create_layer->lv_show_layer->timer_handle = lv_timer_create(create_layer->lv_show_layer->timer_cb, TIME_ON_TRIGGER, NULL);
-            LV_LOG_USER("[+] Create show lv_timer:%s", create_layer->lv_show_layer->lv_obj_name);
+            // LV_LOG_USER("[+] Create show lv_timer:%s", create_layer->lv_show_layer->lv_obj_name);
         }
     }
 }
@@ -90,7 +90,7 @@ void lv_func_goto_layer(lv_layer_t *dst_layer)
 
             if (src_layer->lv_show_layer) {
                 src_layer->exit_cb(src_layer->lv_show_layer);
-                LV_LOG_USER("[-] Delete show lv_layer:%s", src_layer->lv_show_layer->lv_obj_name);
+                // LV_LOG_USER("[-] Delete show lv_layer:%s", src_layer->lv_show_layer->lv_obj_name);
                 if (src_layer->lv_show_layer->lv_obj_layer) {
                     //lv_obj_del_async(src_layer->lv_show_layer->lv_obj_layer);
                     lv_obj_del(src_layer->lv_show_layer->lv_obj_layer);
@@ -98,28 +98,28 @@ void lv_func_goto_layer(lv_layer_t *dst_layer)
                 }
 
                 if (src_layer->lv_show_layer->timer_handle) {
-                    LV_LOG_USER("[-] Delete show lv_timer:%s,%p", src_layer->lv_show_layer->lv_obj_name, src_layer->lv_show_layer->timer_handle);
+                    // LV_LOG_USER("[-] Delete show lv_timer:%s,%p", src_layer->lv_show_layer->lv_obj_name, src_layer->lv_show_layer->timer_handle);
                     lv_timer_del(src_layer->lv_show_layer->timer_handle);
                     src_layer->lv_show_layer->timer_handle = NULL;
                 }
             }
 
             src_layer->exit_cb(src_layer);
-            LV_LOG_USER("[-] Delete lv_layer :%s", src_layer->lv_obj_name);
+            // LV_LOG_USER("[-] Delete lv_layer :%s", src_layer->lv_obj_name);
             //lv_obj_del_async(src_layer->lv_obj_layer);
             lv_obj_del(src_layer->lv_obj_layer);
             src_layer->lv_obj_layer = NULL;
         }
 
         if (src_layer->timer_handle) {
-            LV_LOG_USER("[-] Delete lv_timer :%s,%p", src_layer->lv_obj_name, src_layer->timer_handle);
+            // LV_LOG_USER("[-] Delete lv_timer :%s,%p", src_layer->lv_obj_name, src_layer->timer_handle);
             lv_timer_del(src_layer->timer_handle);
             src_layer->timer_handle = NULL;
         }
 
         lv_timer_t *list;
         while ((list = lv_timer_get_next(NULL)) != timer_system) {
-            LV_LOG_USER("lv_time_del, %p,%p", list, timer_system);
+            // LV_LOG_USER("lv_time_del, %p,%p", list, timer_system);
             lv_timer_del(list);
         }
 
@@ -165,7 +165,9 @@ static void time_clock_update_cb(lv_timer_t *timer)
     lv_layer_t *clock_layer = (lv_layer_t *)obj;
 
     if (is_time_out(&time_enter_clock)) {
-        lv_func_goto_layer(clock_layer);
+        if(clock_layer){
+            lv_func_goto_layer(clock_layer);
+        }
         feed_clock_time();
     }
 }

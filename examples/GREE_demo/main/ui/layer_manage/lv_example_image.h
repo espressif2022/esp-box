@@ -148,23 +148,9 @@ LV_FONT_DECLARE(Helvetica65);
 /* 温度模式风速关机上海网络输入的密码制冷制暖 */
 LV_FONT_DECLARE(SourceHanSansCN_Normal_12);
 
-LV_FONT_DECLARE(font_cn_32);//灯光
-LV_FONT_DECLARE(font_cn_48);//洗涤剩余时间
-
-/*long press to end*/
-LV_FONT_DECLARE(HelveticaNeue_Regular_20);
-
 /*0x20-0x7F*/
-LV_FONT_DECLARE(HelveticaNeue_Regular_24);
+LV_FONT_DECLARE(Helvetica_Neue14);
 
-/*0123456789：-*/
-LV_FONT_DECLARE(HelveticaNeue_Regular_48);
-
-/*中文已恢复出厂*/
-LV_FONT_DECLARE(font_SourceHanSansCN_Medium_22);
-
-/*长按结束洗衣模式恒温器照明模式*/
-LV_FONT_DECLARE(font_SourceHanSansCN_20);
 
 /**********************
  *      MACROS

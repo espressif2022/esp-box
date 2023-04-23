@@ -66,7 +66,7 @@ static void anim_timer_handle(lv_obj_t *parent)
     }
 
     if ((count += 2) >= 100) {
-        lv_func_goto_layer(&menu_layer);
+        // lv_func_goto_layer(&menu_layer);
     }
 }
 

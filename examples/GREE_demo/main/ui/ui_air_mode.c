@@ -86,10 +86,10 @@ static void mode_setevent_cb(lv_event_t *e)
             lv_img_set_src(obj_img_button[get_app_index(0)], mode_menu[get_app_index(0)].icon_select);
             ESP_LOGI(TAG, "func_focus:%d", func_focus);
 
-            if(0 == func_focus){
+            if (0 == func_focus) {
                 lv_img_set_src(img_mode_bg, &mode_cool_bg);
                 lv_img_set_src(img_mode_icon, &mode_icon_cool);
-            }else{
+            } else {
                 lv_img_set_src(img_mode_bg, &mode_warm_bg);
                 lv_img_set_src(img_mode_icon, &mode_icon_warm);
             }
@@ -113,7 +113,7 @@ static void create_title(lv_obj_t *parent)
     lv_obj_clear_flag(page_parent, LV_OBJ_FLAG_SCROLLABLE);
     lv_obj_align(page_parent, LV_ALIGN_CENTER, 0, 0);
 
-    lv_obj_t* line = lv_line_create(page_parent);
+    lv_obj_t *line = lv_line_create(page_parent);
     static lv_point_t line_points[] = { {10, 20}, {290, 20} };
     lv_line_set_points(line, line_points, sizeof(line_points) / sizeof(lv_point_t));
     lv_obj_set_style_line_width(line, 2, LV_PART_MAIN);
@@ -141,7 +141,7 @@ void ui_mode_setinit(lv_obj_t *parent)
     create_title(parent);
 
     img_mode_bg = lv_img_create(page_parent);
-    lv_img_set_src(img_mode_bg, (0 == func_focus) ? &mode_cool_bg: &mode_warm_bg);
+    lv_img_set_src(img_mode_bg, (0 == func_focus) ? &mode_cool_bg : &mode_warm_bg);
     lv_obj_align(img_mode_bg, LV_ALIGN_CENTER, 0, -20);
 
     lv_obj_t *temp_label = lv_label_create(img_mode_bg);
@@ -168,7 +168,7 @@ void ui_mode_setinit(lv_obj_t *parent)
     lv_obj_set_style_bg_color(page_bottom, lv_color_hex(0x30394d), 0);
     lv_obj_set_style_bg_opa(page_bottom, LV_OPA_0, LV_PART_SCROLLBAR | LV_STATE_DEFAULT);
 
-    for(int i = 0; i< FUNC_NUM; i++){
+    for (int i = 0; i < FUNC_NUM; i++) {
         obj_img_button[i] = lv_img_create(page_bottom);
         lv_img_set_src(obj_img_button[i], (i == func_focus) ? mode_menu[i].icon_select : mode_menu[i].icon_unselect);
     }

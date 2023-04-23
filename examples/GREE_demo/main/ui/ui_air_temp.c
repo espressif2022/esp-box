@@ -76,10 +76,10 @@ void temp_set_show()
     sprintf(temp_buffer, "%d", temp_value_set);
     lv_label_set_text(label_temp_set[1], temp_buffer);
 
-    sprintf(temp_buffer, "%d℃", (temp_value_set -1));
+    sprintf(temp_buffer, "%d℃", (temp_value_set - 1));
     lv_label_set_text(label_temp_set[0], temp_buffer);
 
-    sprintf(temp_buffer, "%d℃", (temp_value_set +1));
+    sprintf(temp_buffer, "%d℃", (temp_value_set + 1));
     lv_label_set_text(label_temp_set[2], temp_buffer);
 }
 
@@ -95,15 +95,15 @@ static void temp_setevent_cb(lv_event_t *e)
         if (is_time_out(&time_500ms)) {
             int8_t last_index = func_focus;
             if (LV_KEY_RIGHT == key) {
-                if(func_focus == 1){//focus +, temp ++
+                if (func_focus == 1) { //focus +, temp ++
                     temp_value_set++;
-                }else{
+                } else {
                     func_focus = get_app_index(1);
                 }
             } else if (LV_KEY_LEFT == key) {
-                if(func_focus == 0){//focus -, temp --
+                if (func_focus == 0) { //focus -, temp --
                     temp_value_set--;
-                }else{
+                } else {
                     func_focus = get_app_index(-1);
                 }
             }
@@ -131,7 +131,7 @@ static void create_title(lv_obj_t *parent)
     lv_obj_clear_flag(page_parent, LV_OBJ_FLAG_SCROLLABLE);
     lv_obj_align(page_parent, LV_ALIGN_CENTER, 0, 0);
 
-    lv_obj_t* line = lv_line_create(page_parent);
+    lv_obj_t *line = lv_line_create(page_parent);
     static lv_point_t line_points[] = { {10, 20}, {290, 20} };
     lv_line_set_points(line, line_points, sizeof(line_points) / sizeof(lv_point_t));
     lv_obj_set_style_line_width(line, 2, LV_PART_MAIN);
@@ -201,7 +201,7 @@ void ui_temp_setinit(lv_obj_t *parent)
     lv_obj_set_style_bg_color(page_bottom, lv_color_hex(0x30394d), 0);
     lv_obj_set_style_bg_opa(page_bottom, LV_OPA_0, LV_PART_SCROLLBAR | LV_STATE_DEFAULT);
 
-    for(int i = 0; i< FUNC_NUM; i++){
+    for (int i = 0; i < FUNC_NUM; i++) {
         obj_img_button[i] = lv_img_create(page_bottom);
         lv_img_set_src(obj_img_button[i], (i == func_focus) ? speed_menu[i].icon_select : speed_menu[i].icon_unselect);
     }

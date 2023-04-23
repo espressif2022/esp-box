@@ -22,9 +22,9 @@ typedef struct {
 } ui_menu_focus_t;
 
 static ui_menu_focus_t speed_menu[FUNC_NUM] = {
-    {" ",    &speed_fan_select_1,  &speed_fan_unselect_1,  &washing_Layer},
-    {" ",    &speed_fan_select_2,  &speed_fan_unselect_2,  &thermostat_Layer},
-    {" ",    &speed_fan_select_3,  &speed_fan_unselect_3,  &light_2color_Layer},
+    {" ",    &speed_fan_select_1,  &speed_fan_unselect_1,  NULL},
+    {" ",    &speed_fan_select_2,  &speed_fan_unselect_2,  NULL},
+    {" ",    &speed_fan_select_3,  &speed_fan_unselect_3,  NULL},
 };
 
 static bool air_speed_layer_enter_cb(void *layer);
@@ -88,11 +88,11 @@ static void air_speedevent_cb(lv_event_t *e)
             lv_img_set_src(obj_img_button[last_index], speed_menu[last_index].icon_unselect);
             lv_img_set_src(obj_img_button[get_app_index(0)], speed_menu[get_app_index(0)].icon_select);
 
-            if(0 == func_focus){
+            if (0 == func_focus) {
                 set_time_out(&time_fan_speed, 180);
-            }else if(1 == func_focus){
+            } else if (1 == func_focus) {
                 set_time_out(&time_fan_speed, 120);
-            }else if(2 == func_focus){
+            } else if (2 == func_focus) {
                 set_time_out(&time_fan_speed, 60);
             }
             ESP_LOGI(TAG, "func_focus:%d", func_focus);
@@ -116,7 +116,7 @@ static void create_title(lv_obj_t *parent)
     lv_obj_clear_flag(page_parent, LV_OBJ_FLAG_SCROLLABLE);
     lv_obj_align(page_parent, LV_ALIGN_CENTER, 0, 0);
 
-    lv_obj_t* line = lv_line_create(page_parent);
+    lv_obj_t *line = lv_line_create(page_parent);
     static lv_point_t line_points[] = { {10, 20}, {290, 20} };
     lv_line_set_points(line, line_points, sizeof(line_points) / sizeof(lv_point_t));
     lv_obj_set_style_line_width(line, 2, LV_PART_MAIN);
@@ -157,7 +157,7 @@ void ui_air_speedinit(lv_obj_t *parent)
     lv_obj_set_style_bg_color(page_bottom, lv_color_hex(0x30394d), 0);
     lv_obj_set_style_bg_opa(page_bottom, LV_OPA_0, LV_PART_SCROLLBAR | LV_STATE_DEFAULT);
 
-    for(int i = 0; i< FUNC_NUM; i++){
+    for (int i = 0; i < FUNC_NUM; i++) {
         obj_img_button[i] = lv_img_create(page_bottom);
         lv_img_set_src(obj_img_button[i], (i == func_focus) ? speed_menu[i].icon_select : speed_menu[i].icon_unselect);
     }
@@ -213,9 +213,9 @@ static void air_speed_layer_timer_cb(lv_timer_t *tmr)
     feed_clock_time();
 
     if (is_time_out(&time_fan_speed)) {
-        if(img_fan_icon){
-            fan_speed +=4;
-            lv_img_set_angle(img_fan_icon, (fan_speed%60) * 6 * 10);
+        if (img_fan_icon) {
+            fan_speed += 4;
+            lv_img_set_angle(img_fan_icon, (fan_speed % 60) * 6 * 10);
         }
     }
 }

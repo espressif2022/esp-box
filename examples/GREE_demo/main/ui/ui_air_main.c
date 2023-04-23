@@ -25,7 +25,7 @@ static ui_menu_focus_t mainmenu[FUNC_NUM] = {
     {"温度",    &main_temp_select,  &main_temp_unselect,  &temp_set_layer},
     {"模式",    &main_mode_select,  &main_mode_unselect,  &mode_set_layer},
     {"风速",    &main_speed_select, &main_speed_unselect, &air_speed_layer},
-    {"关机",    &main_power_select, &main_power_unselect, &air_speed_layer},
+    {"关机",    &main_power_select, &main_power_unselect, &air_network_layer},
 };
 
 static bool air_main_layer_enter_cb(void *layer);
@@ -112,7 +112,7 @@ static void create_title(lv_obj_t *parent)
     lv_obj_clear_flag(page_parent, LV_OBJ_FLAG_SCROLLABLE);
     lv_obj_center(page_parent);
 
-    lv_obj_t* line = lv_line_create(page_parent);
+    lv_obj_t *line = lv_line_create(page_parent);
     static lv_point_t line_points[] = { {10, 20}, {290, 20} };
     lv_line_set_points(line, line_points, sizeof(line_points) / sizeof(lv_point_t));
     lv_obj_set_style_line_width(line, 2, LV_PART_MAIN);
@@ -159,7 +159,7 @@ void ui_air_maininit(lv_obj_t *parent)
     lv_obj_remove_style_all(page_bottom_icon);
     lv_obj_set_size(page_bottom_icon, LV_HOR_RES - 30, 50);
 
-    for(int i = 0; i< FUNC_NUM; i++){
+    for (int i = 0; i < FUNC_NUM; i++) {
         obj_img_button[i] = lv_img_create(page_bottom_icon);
         lv_img_set_src(obj_img_button[i], (i == func_focus) ? mainmenu[i].icon_select : mainmenu[i].icon_unselect);
     }

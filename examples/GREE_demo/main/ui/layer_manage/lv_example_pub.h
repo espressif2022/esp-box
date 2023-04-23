@@ -55,16 +55,12 @@ extern "C" {
 #define COLOUR_GREY_4F          0x4F4F4F
 
 extern lv_layer_t boot_Layer;
-extern lv_layer_t menu_layer;
-extern lv_layer_t clock_screen_layer;
-extern lv_layer_t washing_Layer;
-extern lv_layer_t light_2color_Layer;
-extern lv_layer_t thermostat_Layer;
 
 extern lv_layer_t air_main_layer;
 extern lv_layer_t air_speed_layer;
 extern lv_layer_t temp_set_layer;
 extern lv_layer_t mode_set_layer;
+extern lv_layer_t air_network_layer;
 
 extern void ui_obj_to_encoder_init(void);
 
