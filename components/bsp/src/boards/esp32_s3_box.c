@@ -306,7 +306,7 @@ esp_err_t bsp_board_init(void)
 {
     esp_err_t ret = ESP_OK;
 
-    ret |= bsp_board_s3_box_init();
+    // ret |= bsp_board_s3_box_init();
 
     return ret;
 }

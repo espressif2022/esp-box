@@ -133,28 +133,29 @@ esp_err_t bsp_btn_init(void)
 
 esp_err_t bsp_btn_register_callback(bsp_button_id_t btn, button_event_t event, button_cb_t callback, void *user_data)
 {
-    assert((g_btn_handle) && "button not initialized");
-    assert((btn < BOARD_BTN_ID_NUM) && "button id incorrect");
+    // assert((g_btn_handle) && "button not initialized");
+    // assert((btn < BOARD_BTN_ID_NUM) && "button id incorrect");
 
-    ESP_LOGI(TAG, "[+ register] ID:%d, event:%d", btn, event);
+    // ESP_LOGI(TAG, "[+ register] ID:%d, event:%d", btn, event);
 
-    if (NULL == callback) {
-        return iot_button_unregister_cb(g_btn_handle[btn], event);
-    }
+    // if (NULL == callback) {
+    //     return iot_button_unregister_cb(g_btn_handle[btn], event);
+    // }
 
-    return iot_button_register_cb(g_btn_handle[btn], event, callback, user_data);
+    // return iot_button_register_cb(g_btn_handle[btn], event, callback, user_data);
+    return ESP_OK;
 }
 
 esp_err_t bsp_btn_rm_all_callback(bsp_button_id_t btn)
 {
-    assert((g_btn_handle) && "button not initialized");
-    assert((btn < BOARD_BTN_ID_NUM) && "button id incorrect");
+    // assert((g_btn_handle) && "button not initialized");
+    // assert((btn < BOARD_BTN_ID_NUM) && "button id incorrect");
 
-    ESP_LOGI(TAG, "[- register] ID:%d", btn);
+    // ESP_LOGI(TAG, "[- register] ID:%d", btn);
 
-    for (size_t event = 0; event < BUTTON_EVENT_MAX; event++) {
-        iot_button_unregister_cb(g_btn_handle[btn], event);
-    }
+    // for (size_t event = 0; event < BUTTON_EVENT_MAX; event++) {
+    //     iot_button_unregister_cb(g_btn_handle[btn], event);
+    // }
     return ESP_OK;
 }
 
