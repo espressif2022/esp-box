@@ -1,4 +1,4 @@
-name: Build examples IDF4.4
+name: Build examples IDF5.1
 on:
   push:
     branches:
@@ -10,8 +10,8 @@ jobs:
     runs-on: ubuntu-latest
     env:
       PROJECT_PATH: examples/factory_demo
-      BIN_FILE: ESP-Box_Demo_V0.3.0.bin
-    container: espressif/idf:release-v4.4
+      BIN_FILE: ESP-Box_Demo_V0.5.0.bin
+    container: espressif/idf:release-v5.1
     steps:
     - name: Checkout repo
       uses: actions/checkout@v2
@@ -20,15 +20,15 @@ jobs:
 
     - name: esp-idf build
       run: |
-        pwd
-        ls -al
-        cd /opt/esp/idf
-        git checkout c8ce38e60c
-        git submodule update --init --recursive
-        tools/idf_tools.py --non-interactive install cmake
-        ./install.sh
-        source ./export.sh
-        cd $GITHUB_WORKSPACE/$PROJECT_PATH
+        # pwd
+        # ls -al
+        # cd /opt/esp/idf
+        # git checkout 94d9c529f3
+        # git submodule update --init --recursive
+        # tools/idf_tools.py --non-interactive install cmake
+        # ./install.sh
+        # source ./export.sh
+        # cd $GITHUB_WORKSPACE/$PROJECT_PATH
         idf.py build
         cd build
         esptool.py --chip ESP32-S3 merge_bin -o $BIN_FILE @flash_args
@@ -38,7 +38,7 @@ jobs:
       uses: actions/upload-artifact@v3.0.0
       with:
         # Artifact name
-        name: factory-firmware_IDF4.4
+        name: factory-firmware_IDF5.1
         # A file, directory or wildcard pattern that describes what to upload
         path: |
           examples/factory_demo/build/ESP-*.bin
