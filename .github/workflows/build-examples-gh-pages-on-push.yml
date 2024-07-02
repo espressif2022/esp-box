@@ -142,6 +142,7 @@ jobs:
       - name: generate launchpad config
         run: |
           cd images/
+          mv $GITHUB_WORKSPACE/bin/esp32_s3_box_3_factory_test_firmware.bin ./
           ls
           $GITHUB_WORKSPACE/tools/launchpad/rename.sh $GITHUB_WORKSPACE
           ls
