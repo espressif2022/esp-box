@@ -34,17 +34,27 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  empty-job:
+  job1:
     runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
 
-      - name: Empty step
-        run: echo "This is an empty step"
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          submodules: 'recursive'
+      - run: mkdir -p images
+      - name: Build examples
+        shell: bash
+        run: |
+          mv $GITHUB_WORKSPACE/bin/*.bin $GITHUB_WORKSPACE/images/
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: build-images
+          path: images/
 
   deploy:
-    # needs: [job1, job2]
+    needs: [job1]
 
     environment:
       name: github-pages
@@ -65,7 +75,7 @@ jobs:
       - name: generate launchpad config
         run: |
           cd images/
-          mv $GITHUB_WORKSPACE/bin/*.bin ./
+          # mv $GITHUB_WORKSPACE/bin/*.bin ./
           $GITHUB_WORKSPACE/tools/launchpad/rename.sh $GITHUB_WORKSPACE
           $GITHUB_WORKSPACE/tools/launchpad/generate_launchpad_config.sh $GITHUB_REPOSITORY
 
