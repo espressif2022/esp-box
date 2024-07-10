@@ -121,7 +121,7 @@ jobs:
           path: images/
 
   deploy:
-    needs: [job1, job2]
+    # needs: [job1, job2]
 
     environment:
       name: github-pages
