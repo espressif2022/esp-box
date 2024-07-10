@@ -33,6 +33,16 @@ concurrency:
   group: "pages"
   cancel-in-progress: true
 
+jobs:
+  empty-job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Empty step
+        run: echo "This is an empty step"
+
   deploy:
     # needs: [job1, job2]
 
