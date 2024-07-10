@@ -47,23 +47,41 @@ SUPPORTED_APPS=`echo $SUPPORTED_APPS | sed 's/\(.*\),/\1/'`
 echo "$SUPPORTED_APPS" >> $OUT_FILE
 echo "" >> $OUT_FILE
 
+targets=("esp32-s3" "esp32-c6" "esp32-p4")
+
 # build config for each app
+targets=("esp32-s3" "esp32-c6" "esp32-p4")
+
 for app in "${APPS[@]}"
 do
-	echo "[$app]" >> $OUT_FILE
+    echo "[$app]" >> $OUT_FILE
 
-    # Get the supported targets
+    # 获取支持的目标
     TARGETS=($(ls | grep "$app".bin | awk -F "_"$app".bin$" '{print $1}' | grep -v '_'))
 
-    target=(esp32-s3)
     CHIPSETS="chipsets = ["
-    tUP=`echo $target |  tr 'a-z' 'A-Z'`
-    CHIPSETS+="\"$tUP\","
-    image="image."$target" = \"$app.bin\""
-    IMAGES+=("$image")
-    CHIPSETS+="]"
-    # remove last comma
-    CHIPSETS=`echo $CHIPSETS | sed 's/\(.*\),/\1/'`
+    IMAGES=()
+
+    for target in "${targets[@]}"; do
+        tUP=$(echo "$target" | tr 'a-z' 'A-Z')
+
+        if [[ $app == *"c6"* && $target == "esp32-c6" ]]; then
+            CHIPSETS+="\"$tUP\","
+            image="image.$target = \"$app.bin\""
+            IMAGES+=("$image")
+        elif [[ $app == *"p4"* && $target == "esp32-p4" ]]; then
+            CHIPSETS+="\"$tUP\","
+            image="image.$target = \"$app.bin\""
+            IMAGES+=("$image")
+        elif [[ $app != *"c6"* && $app != *"p4"* ]]; then
+            CHIPSETS+="\"$tUP\","
+            image="image.$target = \"$app.bin\""
+            IMAGES+=("$image")
+        fi
+    done
+
+    # 关闭 CHIPSETS 列表并移除最后一个逗号
+    CHIPSETS="${CHIPSETS%,}]"
 
     echo $CHIPSETS >> $OUT_FILE
 
@@ -72,7 +90,7 @@ do
         echo $img >> $OUT_FILE
     done
 
-    # TODO: Update the android phone app links when it is available on android play store
+    # TODO: 更新安卓应用链接，当它在安卓应用商店可用时
     echo "ios_app_url = \"\"" >> $OUT_FILE
     echo "android_app_url = \"\"" >> $OUT_FILE
     echo "" >> $OUT_FILE
