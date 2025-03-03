@@ -68,7 +68,6 @@ jobs:
           pip install "idf_build_apps<2.0"
 
           cd $GITHUB_WORKSPACE/examples/${{matrix.build-dir}}
-          # diff sdkconfig.defaults ${{matrix.boards}} | grep '^>' | sed 's/^> *//' | grep -v '^#' | sed 's/.*/\n&/' >> sdkconfig.defaults
           comm -23 <(grep -v '^#' ${{matrix.boards}} | sort) <(grep -v '^#' sdkconfig.defaults | sort) | sed 's/.*/\n&/' >> sdkconfig.defaults
 
           if [[ ${{matrix.build-dir}} == chatgpt_demo ]]; then
@@ -81,6 +80,7 @@ jobs:
           idf.py build
           cd build
           esptool.py --chip esp32s3 merge_bin -o "$GITHUB_WORKSPACE/images/${{matrix.build-dir}}_${{matrix.boards}}.bin" @flash_args
+      - run: ls $GITHUB_WORKSPACE/images/*
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
