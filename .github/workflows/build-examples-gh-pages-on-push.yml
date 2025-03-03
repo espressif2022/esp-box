@@ -21,6 +21,7 @@ on:
     push:
         branches:
         - master
+        - feat/update_actions
 
 # Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:
@@ -86,6 +87,7 @@ jobs:
         with:
           name: build-images
           path: images/
+          overwrite: true
 
   job2:
     runs-on: ubuntu-latest
@@ -104,7 +106,7 @@ jobs:
         run: |
           . $IDF_PATH/export.sh
           . $ESP_MATTER_PATH/export.sh
-          pip install --upgrade idf-component-manager
+          pip install --upgrade "idf-component-manager~=1.2"
           pip install "idf_build_apps<2.0"
 
           cd $GITHUB_WORKSPACE/examples/${{matrix.build-dir}}
@@ -119,6 +121,7 @@ jobs:
         with:
           name: build-images
           path: images/
+          overwrite: true
 
   deploy:
     needs: [job1, job2]
