@@ -44,6 +44,7 @@ jobs:
           name: build-images-* # Delete all artifacts with name starting with build-images-
 
   job1:
+    needs: [delete-old-artifacts]
     runs-on: ubuntu-latest
     container: espressif/idf:release-v5.1
     strategy:
@@ -97,6 +98,7 @@ jobs:
           overwrite: true
 
   job2:
+    needs: [delete-old-artifacts]
     runs-on: ubuntu-latest
     container: espressif/esp-matter:latest_idf_v5.1.1
     strategy:
