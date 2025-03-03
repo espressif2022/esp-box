@@ -35,6 +35,14 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  delete-old-artifacts:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Delete old artifacts
+        uses: geekyeggo/delete-artifact@v2
+        with:
+          name: build-images-* # Delete all artifacts with name starting with build-images-
+
   job1:
     runs-on: ubuntu-latest
     container: espressif/idf:release-v5.1
@@ -80,11 +88,6 @@ jobs:
           idf.py build
           cd build
           esptool.py --chip esp32s3 merge_bin -o "$GITHUB_WORKSPACE/images/${{matrix.build-dir}}_${{matrix.boards}}.bin" @flash_args
-      
-      - name: Delete old artifacts
-        uses: geekyeggo/delete-artifact@v2
-        with:
-          name: build-images-* # Delete all artifacts with name starting with build-images-
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
@@ -120,11 +123,6 @@ jobs:
           cd build
           esptool.py --chip esp32s3 merge_bin -o "$GITHUB_WORKSPACE/images/${{matrix.build-dir}}_${{matrix.boards}}.bin" @flash_args
 
-      - name: Delete old artifacts
-        uses: geekyeggo/delete-artifact@v2
-        with:
-          name: build-images-* # Delete all artifacts with name starting with build-images-
-
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
@@ -148,7 +146,7 @@ jobs:
       - name: Download builds
         uses: actions/download-artifact@v4
         with:
-          name: build-images
+          name: '**/build-images-*'
           path: images/
 
       - name: generate launchpad config
