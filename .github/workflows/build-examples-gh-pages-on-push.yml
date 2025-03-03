@@ -80,7 +80,6 @@ jobs:
           idf.py build
           cd build
           esptool.py --chip esp32s3 merge_bin -o "$GITHUB_WORKSPACE/images/${{matrix.build-dir}}_${{matrix.boards}}.bin" @flash_args
-      - run: ls $GITHUB_WORKSPACE/images/*
       
       - name: Delete old artifacts
         uses: geekyeggo/delete-artifact@v2
@@ -90,7 +89,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
-          name: build-images-${{ github.run_id }}-${{matrix.build-dir}}
+          name: build-images-${{ github.run_id }}-${{matrix.build-dir}}-${{matrix.boards}}
           path: images/
           overwrite: true
 
@@ -129,7 +128,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
-          name: build-images-${{ github.run_id }}-${{matrix.build-dir}}
+          name: build-images-${{ github.run_id }}-${{matrix.build-dir}}-${{matrix.boards}}
           path: images/
           overwrite: true
 
