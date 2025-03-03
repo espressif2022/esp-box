@@ -155,13 +155,6 @@ jobs:
       - name: generate launchpad config
         run: |
           cd images/
-          echo $GITHUB_WORKSPACE
-          ls *
-          echo $GITHUB_WORKSPACE
-          ls $GITHUB_WORKSPACE/*
-          echo $GITHUB_WORKSPACE
-          ls $GITHUB_WORKSPACE/bin/*
-          echo $GITHUB_WORKSPACE
           mv $GITHUB_WORKSPACE/bin/*.bin ./
           ls *
           $GITHUB_WORKSPACE/tools/launchpad/rename.sh $GITHUB_WORKSPACE
@@ -177,4 +170,4 @@ jobs:
 
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v1
+        uses: actions/deploy-pages@v4
