@@ -126,7 +126,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
-          name: build-images-${{ github.run_id }}-${{matrix.build-dir}}-${{matrix.boards}}
+          name: build-images-${{matrix.build-dir}}-${{matrix.boards}}
           path: images/
           overwrite: true
 
@@ -146,8 +146,9 @@ jobs:
       - name: Download builds
         uses: actions/download-artifact@v4
         with:
-          name: '**/build-images-*'
+          pattern: build-images-*
           path: images/
+          merge-multiple: true
 
       - name: generate launchpad config
         run: |
