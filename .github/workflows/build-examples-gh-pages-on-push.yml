@@ -93,7 +93,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
-          name: build-images-${{ github.run_id }}-${{matrix.build-dir}}-${{matrix.boards}}
+          name: build-images-${{matrix.build-dir}}-${{matrix.boards}}
           path: images/
           overwrite: true
 
@@ -155,6 +155,9 @@ jobs:
       - name: generate launchpad config
         run: |
           cd images/
+          ls *
+          ls $GITHUB_WORKSPACE/*
+          ls $GITHUB_WORKSPACE/bin/*
           mv $GITHUB_WORKSPACE/bin/*.bin ./
           $GITHUB_WORKSPACE/tools/launchpad/rename.sh $GITHUB_WORKSPACE
           $GITHUB_WORKSPACE/tools/launchpad/generate_launchpad_config.sh $GITHUB_REPOSITORY
