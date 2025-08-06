@@ -39,10 +39,20 @@ jobs:
   delete-old-artifacts:
     runs-on: ubuntu-latest
     steps:
+      - name: List artifacts
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const artifacts = await github.rest.actions.listArtifactsForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+            });
+            console.log(artifacts.data.artifacts.map(a => a.name));
       - name: Delete old artifacts
         uses: geekyeggo/delete-artifact@v2
         with:
           name: build-images-* # Delete all artifacts with name starting with build-images-
+          failOnError: false
 
   job1:
     needs: [delete-old-artifacts]
