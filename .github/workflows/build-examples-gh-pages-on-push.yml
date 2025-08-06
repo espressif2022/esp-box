@@ -49,7 +49,7 @@ jobs:
             });
             console.log(artifacts.data.artifacts.map(a => a.name));
       - name: Delete old artifacts
-        uses: geekyeggo/delete-artifact@v2
+        uses: geekyeggo/delete-artifact@v3
         with:
           name: build-images-* # Delete all artifacts with name starting with build-images-
           failOnError: false
