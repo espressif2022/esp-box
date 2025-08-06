@@ -67,7 +67,7 @@ build_example_chatgpt_demo:
       - IMAGE: espressif/idf:release-v5.2
       - IMAGE: espressif/idf:release-v5.3
       - IMAGE: espressif/idf:release-v5.4
-      - IMAGE: espressif/idf:latest
+      - IMAGE: espressif/idf:release-v5.5
   variables:
     EXAMPLE_DIR: examples/chatgpt_demo
     NVS_DIR: examples/chatgpt_demo/factory_nvs
@@ -87,7 +87,7 @@ build_example_chatgpt_demo_factory_nvs:
       - IMAGE: espressif/idf:release-v5.2
       - IMAGE: espressif/idf:release-v5.3
       - IMAGE: espressif/idf:release-v5.4
-      - IMAGE: espressif/idf:latest
+      - IMAGE: espressif/idf:release-v5.5
   variables:
     EXAMPLE_DIR: examples/chatgpt_demo/factory_nvs
 
@@ -102,7 +102,7 @@ build_example_factory_demo:
       - IMAGE: espressif/idf:release-v5.2
       - IMAGE: espressif/idf:release-v5.3
       - IMAGE: espressif/idf:release-v5.4
-      - IMAGE: espressif/idf:latest
+      - IMAGE: espressif/idf:release-v5.5
   variables:
     EXAMPLE_DIR: examples/factory_demo
 
@@ -117,7 +117,7 @@ build_example_image_display:
       - IMAGE: espressif/idf:release-v5.2
       - IMAGE: espressif/idf:release-v5.3
       - IMAGE: espressif/idf:release-v5.4
-      - IMAGE: espressif/idf:latest
+      - IMAGE: espressif/idf:release-v5.5
   variables:
     EXAMPLE_DIR: examples/image_display
 
@@ -132,7 +132,7 @@ build_example_lv_demos:
       - IMAGE: espressif/idf:release-v5.2
       - IMAGE: espressif/idf:release-v5.3
       - IMAGE: espressif/idf:release-v5.4
-      - IMAGE: espressif/idf:latest
+      - IMAGE: espressif/idf:release-v5.5
   variables:
     EXAMPLE_DIR: examples/lv_demos
 
@@ -147,7 +147,7 @@ build_example_mp3_demo:
       - IMAGE: espressif/idf:release-v5.2
       - IMAGE: espressif/idf:release-v5.3
       - IMAGE: espressif/idf:release-v5.4
-      - IMAGE: espressif/idf:latest
+      - IMAGE: espressif/idf:release-v5.5
   variables:
     EXAMPLE_DIR: examples/mp3_demo
 
@@ -160,9 +160,9 @@ build_example_usb_camera_lcd_display:
       - IMAGE: espressif/idf:release-v5.0
       - IMAGE: espressif/idf:release-v5.1
       - IMAGE: espressif/idf:release-v5.2
-      - IMAGE: espressif/idf:release-v5.3
+      # - IMAGE: espressif/idf:release-v5.3 don't support release-v5.3 now.
       - IMAGE: espressif/idf:release-v5.4
-      - IMAGE: espressif/idf:latest
+      # - IMAGE: espressif/idf:latest usb_stream do not support release-v5.5
   variables:
     EXAMPLE_DIR: examples/usb_camera_lcd_display
 
@@ -176,7 +176,7 @@ build_example_esp_joystick:
       - IMAGE: espressif/idf:release-v5.2
       - IMAGE: espressif/idf:release-v5.3
       - IMAGE: espressif/idf:release-v5.4
-      - IMAGE: espressif/idf:latest
+      # - IMAGE: espressif/idf:release-v5.5 esp_now do not support release-v5.5
   variables:
     EXAMPLE_DIR: examples/esp_joystick
 
@@ -191,7 +191,7 @@ build_example_usb_headset:
       - IMAGE: espressif/idf:release-v5.2
       - IMAGE: espressif/idf:release-v5.3
       - IMAGE: espressif/idf:release-v5.4
-      - IMAGE: espressif/idf:latest
+      - IMAGE: espressif/idf:release-v5.5
   variables:
     EXAMPLE_DIR: examples/usb_headset
 
@@ -206,6 +206,6 @@ build_example_watering_demo:
       - IMAGE: espressif/idf:release-v5.2
       - IMAGE: espressif/idf:release-v5.3
       - IMAGE: espressif/idf:release-v5.4
-      - IMAGE: espressif/idf:latest
+      - IMAGE: espressif/idf:release-v5.5
   variables:
     EXAMPLE_DIR: examples/watering_demo

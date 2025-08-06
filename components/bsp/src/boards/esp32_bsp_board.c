@@ -89,6 +89,7 @@ esp_err_t bsp_btn_init(void)
     int btn_num = 0;
     g_btn_handle = calloc(BSP_BUTTON_NUM, sizeof(button_handle_t));
     assert((g_btn_handle) && "memory is insufficient for button");
+    esp_log_level_set("button", ESP_LOG_NONE);
     return bsp_iot_button_create(g_btn_handle, &btn_num, BSP_BUTTON_NUM);
 }
 
